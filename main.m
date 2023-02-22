@@ -1,12 +1,12 @@
 close all;
 clear all;
 
-file_path =  '.\fig-test\1\';% 鍥惧儚鏂囦欢澶硅矾寰勶紝
+file_path =  '.\fig-test\1\';% Image folder path
 cc=colormap(lines(100));
-img_path_list = dir(strcat(file_path,'*.bmp'));%鑾峰彇璇ユ枃浠跺す涓墍鏈塲pg鏍煎紡鐨勫浘鍍忋?
-img_num = length(img_path_list);%鑾峰彇鍥惧儚鎬绘暟閲忥紝
+img_path_list = dir(strcat(file_path,'*.bmp'));%Get all jpg images in this folder
+img_num = length(img_path_list);%Total number of images acquired
 NUMD=zeros(img_num,10);
-for ii = 1:10 %閫愪竴璇诲彇鍥惧儚锛?   
+for ii = 1:10 %Read images one by one   
     I=imread(strcat('fig-test\',strcat(num2str(ii),'.bmp')));
         image_size=size(I);
         dimension=numel(image_size);
@@ -28,10 +28,10 @@ for ii = 1:10 %閫愪竴璇诲彇鍥惧儚锛?
 
     file_path =  strcat(strcat('.\fig-test\',num2str(ii)),'\');
     %SVDis=zeros(size(STATS0,1),img_num);
-    if img_num > 0 %鏈夋弧瓒虫潯浠剁殑鍥惧儚锛?
+    if img_num > 0 %There are images that meet the conditions
         Dis=zeros(size(posX,1),img_num);
-        for jj = 1:img_num %閫愪竴璇诲彇鍥惧儚锛?
-            image_name = img_path_list(jj).name;% 鍥惧儚鍚嶏紝
+        for jj = 1:img_num %Read images one by one
+            image_name = img_path_list(jj).name;% image name
             I1 =  imread(strcat(file_path,image_name));
             
             image_size=size(I1);
@@ -53,7 +53,7 @@ for ii = 1:10 %閫愪竴璇诲彇鍥惧儚锛?
                     Dnum=Dnum+1;
                  end  
             end   
-            %鍒ゆ柇宸紓
+            %Judgment difference
             NUMD(jj,ii)=Dnum/size(posX, 1);%(2*size(posX, 1));
         end
     end
